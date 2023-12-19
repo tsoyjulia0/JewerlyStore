@@ -7,7 +7,8 @@
 
 import UIKit
 
-class LoginViewController: UIViewController, UITabBarControllerDelegate {
+class LoginViewController: UIViewController, UITabBarControllerDelegate{
+
 
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var phoneTextField: UITextField!
@@ -49,16 +50,24 @@ class LoginViewController: UIViewController, UITabBarControllerDelegate {
                 
             alertLabel.text = "Success!"
             isLog = true
-        } 
+        }
         else {
-            alertLabel.text = "Invalid credentials."
+            showAlert(message: "Incorrect phone number or password")
             isLog = false
         }
+    }
+    
+    func showAlert(message: String) {
+        let alert = UIAlertController(title: "Wrong credentials", message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alert.addAction(okAction)
+        present(alert, animated: true, completion: nil)
     }
     
     @objc private func hideAlert() {
         alertLabel.text = ""
     }
+    
     
     @objc private func openHomePage(){
         if isLog {
@@ -70,6 +79,8 @@ class LoginViewController: UIViewController, UITabBarControllerDelegate {
             alertLabel.text = "Enter credentials to login."
         }
     }
+    
+
 }
 
 

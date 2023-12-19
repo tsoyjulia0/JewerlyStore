@@ -34,7 +34,17 @@ class ProductDetailViewController: UIViewController {
         productDetailsImage?.image = UIImage(named: selectedProduct.imageName)
     }
     
-
+    @IBAction func addToCartButtonTapped(_ sender: UIButton) {
+        CartManager.shared.addProductToCart(product: selectedProduct)
+        showAddedToCartAlert()
+    }
     
-
+    func showAddedToCartAlert() {
+        let alert = UIAlertController(title: "Added to Cart", message: "\(selectedProduct.name) has been added to your cart.", preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alert.addAction(okAction)
+        present(alert, animated: true, completion: nil)
+    }
+    
 }

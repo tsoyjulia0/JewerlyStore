@@ -25,8 +25,7 @@ struct Category {
        }
 }
 
-//вувув
-
+//deded
 extension Category {
     static func makeMock() -> [Category] {
         return [

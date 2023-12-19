@@ -48,22 +48,17 @@ class RegistrationViewController: UIViewController {
             let passwordPredicate = NSPredicate(format: "SELF MATCHES %@", passwordRegex)
                 
             if passwordPredicate.evaluate(with: password) {
-                // Store the registered user in UserDefaults
                 let registeredUser = User(name: name, phone: phone, password: password)
                 storeUser(user: registeredUser)
 
                 alertLabel.text = "Great!"
                 
-//                let userVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "UserViewController") as! UserViewController
-//                userVC.user = registeredUser
-//                navigationController?.pushViewController(userVC, animated: true)
-                
             } else {
-                alertLabel.text = "Password must include at least 8 characters and 1 digit"
+                showAlert(message: "Password must include at least 8 characters and 1 digit")
             }
                 
         } else {
-            alertLabel.text = "Please fill in all fields."
+            showAlert(message: "Please fill in all fields.")
         }
         
         let loginVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginPage") as! LoginViewController
@@ -73,6 +68,13 @@ class RegistrationViewController: UIViewController {
                     
         present(navigationController, animated: true, completion: nil)
         
+    }
+    
+    func showAlert(message: String) {
+        let alert = UIAlertController(title: "Wrong credentials", message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alert.addAction(okAction)
+        present(alert, animated: true, completion: nil)
     }
     
     @objc private func hideAlert() {
